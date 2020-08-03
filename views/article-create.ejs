@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pranalika</title>
+    <link
+      href="https://cdn.quilljs.com/1.0.0/quill.snow.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/stylesheets/index.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="sidebar">
+      <ul class="sidebar-list">
+        <li class="sd-list-item">
+          <a class="sd-link-item" href="/">
+            <span class="fa-gap"><i class="fas fa-tachometer-alt"></i></span>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="sd-list-item">
+          <a class="sd-link-item" href="/">
+            <span class="fa-gap"><i class="fas fa-user-circle"></i></span>
+            <span>View Profile</span>
+          </a>
+        </li>
+        <li class="sd-list-item">
+          <a class="sd-link-item" href="/articles/new">
+            <span class="fa-gap"><i class="fas fa-plus"></i></span>
+            <span>Add Post</span>
+          </a>
+        </li>
+        <li class="sd-list-item">
+          <a class="sd-link-item" href="/articles/list">
+            <span class="fa-gap"><i class="fas fa-newspaper"></i></span>
+            <span>View Post</span>
+          </a>
+        </li>
+        <li class="sd-list-item">
+          <a class="sd-link-item" href="/articles/list">
+            <span class="fa-gap"><i class="fas fa-edit"></i></span>
+            <span>Update Post</span>
+          </a>
+        </li>
+        <li class="sd-list-item">
+          <a class="sd-link-item" href="/articles/list">
+            <span class="fa-gap"><i class="fas fa-trash"></i></span>
+            <span>Delete Post</span>
+          </a>
+        </li>
+        <li class="sd-list-item">
+          <a class="sd-link-item" href="/articles/list">
+            <span class="fa-gap"><i class="fas fa-comments"></i></span>
+            <span>View Comments</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="index-container article-create-container">
+      <main class="main">
+        <div class="display-details">
+          <p class="flex logout">
+            <span>
+              Howdy, <%= user.username %>
+            </span>
+            <a class="btn-logout" href="/users/logout">
+              <i class="fas fa-sign-out-alt"></i>
+            </a>
+          </p>
+        </div>
+        <div class="main-content">
+          <section class="left-section">
+            <form class="add-post-form" action="/articles" method="POST">
+              <div class="form-group">
+                <label for="add-post-title">Title</label>
+                <input
+                  class="title"
+                  name="title"
+                  type="text"
+                  id="add-post-title"
+                  placeholder="title"
+                />
+              </div>
+              <div class="form-group">
+                <input type="hidden" name="description" />
+                <div class="content-editable"></div>
+              </div>
+              <input class="btn btn-submit" type="submit" value="Submit Post" />
+            </form>
+          </section>
+          <section class="right-section"></section>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+    <script>
+      var toolbarOptions = [
+        ["bold", "italic", "underline", "strike"], // toggled buttons
+        ["blockquote", "code-block"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        [{ script: "sub" }, { script: "super" }], // superscript/subscript
+        [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+        [{ direction: "rtl" }], // text direction
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+        [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+        [{ font: [] }],
+        [{ align: [] }],
+      ];
+
+      var editor = new Quill(".content-editable", {
+        theme: "snow",
+        modules: {
+          toolbar: toolbarOptions,
+        },
+        placeholder: "Channelise your thoughts",
+      });
+
+      const createPostForm = document.querySelector(".add-post-form");
+      createPostForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        fetch("/articles", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            article: {
+              title: createPostForm["title"].value,
+              description: JSON.stringify(editor.getContents()),
+            },
+          }),
+        }).then(() => {
+          window.location.href = "/";
+        });
+        createPostForm.reset();
+      });
+    </script>
+  </body>
+</html>

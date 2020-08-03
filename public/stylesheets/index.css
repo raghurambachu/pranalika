@@ -1,0 +1,337 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 18px;
+  line-height: 1.5;
+  font-family: "Nunito", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+h2 {
+  font-size: 1.45rem;
+}
+
+.btn {
+  padding: 0.5rem 1.5rem;
+  outline: none;
+  border: 1px solid black;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.flex {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.index-container {
+  display: grid;
+  grid-template-columns: 16vw auto;
+}
+
+.sidebar {
+  position: fixed;
+  width: 16vw;
+  min-height: 100vh;
+  background: #252525;
+  z-index: 1;
+  font-size: 1.1rem;
+  padding: 1rem 1.5rem;
+}
+
+.sd-link-item,
+.sd-list-item {
+  color: #f5f5f5;
+}
+
+.sd-list-item {
+  margin: 0.5rem 0;
+}
+
+.fa-gap {
+  margin-right: 0.55rem;
+}
+.main {
+  padding: 2.25rem 2.5rem;
+  grid-column-start: 2;
+  position: relative;
+}
+
+.display-details {
+  position: absolute;
+  top: 0.75%;
+  right: 2.5%;
+}
+
+.logout {
+  align-items: center;
+}
+
+.logout > * {
+  margin-left: 1rem;
+}
+
+.btn-logout {
+  font-size: 1.2rem;
+  color: #252525;
+}
+
+/* ********************** 
+    Here onwards page specific CSS
+*/
+.article-create-container .main-content {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 4fr 2fr;
+  grid-template-areas: "left-section right-section";
+}
+
+.article-create-container .left-section {
+  grid-area: left-section;
+}
+
+.article-create-container .rigth-section {
+  grid-area: right-section;
+}
+
+.article-create-container .form-group > * {
+  display: block;
+}
+
+.article-create-container .title,
+.article-create-container .description {
+  width: 100%;
+  margin-bottom: 2rem;
+  font-family: "Nunito", sans-serif;
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.article-create-container .content-editable {
+  height: 50vh;
+  width: 100%;
+  border: 1px solid grey;
+  padding: 0.5rem;
+  outline: 0;
+  font-size: 1.1rem;
+}
+
+.article-create-container .btn-submit {
+  background: #00b7ff;
+  color: whitesmoke;
+  margin: 1rem 0;
+}
+
+/* ********************** 
+    Here onwards page specific CSS
+    list-articles.ejs
+*/
+
+.list-article-container .main-content {
+  display: grid;
+  grid-gap: 1.5rem;
+  grid-template-columns: 4fr 2fr;
+}
+
+.list-article-container .list-article-card {
+  border: 1px solid #252525;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 2.5px;
+  background: #f8f8f8;
+  margin-bottom: 1rem;
+}
+
+.list-article-container .list-article-card-header,
+.list-article-container .list-article-card-body {
+  border-bottom: 1px solid #252525;
+  padding: 0.25rem 0.75rem;
+}
+
+.list-article-container .list-article-card-footer {
+  padding: 0.25rem 0.75rem;
+}
+.list-article-container .list-article-card-body {
+  background: white;
+}
+
+.list-article-container .left-section a {
+  color: #00b7ff;
+  font-weight: bold;
+}
+
+.list-article-container .article-card-delete {
+  margin-left: 1.5rem;
+}
+
+/* ********************** 
+    Here onwards page specific CSS
+    index.ejs
+*/
+.dashboard-card {
+  padding: 2rem;
+  width: 20%;
+  border-radius: 0.75rem;
+  margin-right: 2rem;
+  font-weight: bold;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-card-1 {
+  background: rgb(4, 128, 199);
+  background: linear-gradient(45deg, #0480c7 24%, #00d4ff 96%);
+}
+
+.dashboard-card-2 {
+  background: rgb(240, 184, 0);
+  background: linear-gradient(
+    45deg,
+    rgba(240, 184, 0, 1) 44%,
+    rgba(246, 255, 0, 1) 96%
+  );
+}
+
+.index-page-container .dashboard-card-title,
+.index-page-container .dashboard-card-title-count {
+  color: whitesmoke;
+}

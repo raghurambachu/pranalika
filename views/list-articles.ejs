@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pranalika</title>
+    <link rel="stylesheet" href="/stylesheets/index.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="sidebar">
+      <ul class="sidebar-list">
+        <li class="sd-list-item">
+          <a class="sd-link-item" href="/">
+            <span class="fa-gap"><i class="fas fa-tachometer-alt"></i></span>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="sd-list-item">
+          <a class="sd-link-item" href="/">
+            <span class="fa-gap"><i class="fas fa-user-circle"></i></span>
+            <span>View Profile</span>
+          </a>
+        </li>
+        <li class="sd-list-item">
+          <a class="sd-link-item" href="/articles/new">
+            <span class="fa-gap"><i class="fas fa-plus"></i></span>
+            <span>Add Post</span>
+          </a>
+        </li>
+        <li class="sd-list-item">
+          <a class="sd-link-item" href="/articles/list">
+            <span class="fa-gap"><i class="fas fa-newspaper"></i></span>
+            <span>View Post</span>
+          </a>
+        </li>
+        <li class="sd-list-item">
+          <a class="sd-link-item" href="/articles/list">
+            <span class="fa-gap"><i class="fas fa-edit"></i></span>
+            <span>Update Post</span>
+          </a>
+        </li>
+        <li class="sd-list-item">
+          <a class="sd-link-item" href="/articles/list">
+            <span class="fa-gap"><i class="fas fa-trash"></i></span>
+            <span>Delete Post</span>
+          </a>
+        </li>
+        <li class="sd-list-item">
+          <a class="sd-link-item" href="/articles/list">
+            <span class="fa-gap"><i class="fas fa-comments"></i></span>
+            <span>View Comments</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="index-container list-article-container">
+      <main class="main">
+        <div class="display-details">
+          <p class="flex logout">
+            <span>
+              Howdy, <%= user.username %>
+            </span>
+            <a class="btn-logout" href="/users/logout">
+              <i class="fas fa-sign-out-alt"></i>
+            </a>
+          </p>
+        </div>
+        <div class="main-content">
+          <section class="left-section">
+            <% articles.forEach(article => { %>
+            <div class="list-article-card">
+              <div class="list-article-card-header flex space-between">
+                <p class="article-card-title">
+                  <a href="/articles/<%= article._id %>">
+                    <%= article.title %></a
+                  >
+                </p>
+                <p class="article-card-read-time">
+                  <%= article.readTime %> min
+                </p>
+              </div>
+              <div class="list-article-card-body">
+                <p>
+                  <%- article.description.slice(0,400) %>
+                  <a href="/articles/<%= article._id %>"> Read More...</a>
+                </p>
+              </div>
+              <div class="list-article-card-footer flex space-between">
+                <div class="list-article-card-created">
+                  <% const date = article.createdAt.toString().split(" ") %>
+                  Created on : <%= `${date[2]}, ${date[1]} ${date[3]}` %>
+                </div>
+                <div class="list-article-card-update-delete">
+                  <a
+                    class="article-card-update"
+                    href="/articles/<%= article._id %>/update"
+                    >Update</a
+                  >
+                  <a
+                    class="article-card-delete"
+                    href="/articles/<%= article._id %>/delete"
+                    >Delete</a
+                  >
+                </div>
+              </div>
+            </div>
+            <% }) %>
+          </section>
+          <section class="right-section"></section>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
