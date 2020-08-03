@@ -12,7 +12,7 @@ const commentSchema = new Schema(
       required: true,
       ref: "Article",
     },
-    authorId: {
+    userId: {
       type: Schema.Types.ObjectId,
       required: true,
       ref: "User",

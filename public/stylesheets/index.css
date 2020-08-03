@@ -144,10 +144,24 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  font-size: 1.75rem;
+}
+
 h2 {
   font-size: 1.45rem;
 }
 
+h4 {
+  font-size: 0.75rem;
+}
+
+img.ql-image {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  margin: 0.75rem auto;
+}
 .btn {
   padding: 0.5rem 1.5rem;
   outline: none;
@@ -334,4 +348,127 @@ h2 {
 .index-page-container .dashboard-card-title,
 .index-page-container .dashboard-card-title-count {
   color: whitesmoke;
+}
+
+/* ********************** 
+    Here onwards page specific CSS
+    article.ejs
+*/
+.article-container .article-header {
+  position: absolute;
+  width: 100%;
+  padding: 0.85rem;
+  background: whitesmoke;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.article-container .article-logout,
+.article-container .article-login {
+  color: #00b7ff;
+  margin-right: 1.5rem;
+}
+
+.article-container .main-content {
+  display: grid;
+  grid-template-columns: 2fr 4fr 2fr;
+  grid-template-areas: "left-sidebar center right-sidebar";
+}
+
+.article-container .left-sidebar {
+  grid-area: left-sidebar;
+}
+
+.article-container .center-content-area {
+  padding: 5rem 0 2.5rem;
+  grid-area: center;
+}
+
+.article-container .right-sidebar {
+  grid-area: right-sidebar;
+}
+
+.article-container .article-title {
+  margin-bottom: 0;
+}
+
+.article-container .article-date {
+  font-size: 0.75rem;
+}
+
+.article-container .article-author-div {
+  margin-top: -0.65rem;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.article-container .article-author {
+  font-weight: bold;
+  margin: 0;
+}
+
+.article-container .article-author-link {
+  color: #00d4ff;
+}
+
+.article-container .btn-follow {
+  border: #00d4ff;
+  color: gray;
+  background: white;
+  font-weight: bold;
+  border: 1.5px solid #00d4ff;
+  padding: 0.25rem 1rem;
+  border-radius: 5.5px;
+  font-size: 0.7rem;
+}
+
+/* Comments Section with article.ejs */
+.article-comment-section .article-comment {
+  display: block;
+  width: 100%;
+  resize: none;
+  font-family: "Nunito", sans-serif;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  outline: 0;
+  margin-bottom: 0.75rem;
+}
+
+.article-comment-section .article-comment:focus {
+  border: 1.5px solid grey;
+}
+
+.article-comment-section .btn-add-comment {
+  color: #00d4ff;
+  background: #f8f8f8;
+  border: 1px solid #00d4ff;
+}
+
+.article-comment-section .comment-content-para {
+  padding-left: 2rem;
+}
+
+.article-comment-section .article-comment-list {
+  margin-bottom: 2rem;
+}
+
+.article-comment-section .article-comment-list-item {
+  margin-bottom: 0.5rem;
+}
+
+.article-comment-section .article-comment-link {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #00d4ff;
+}
+
+.article-comment-section .list-item-title {
+  font-size: 0.75rem;
+}
+
+.article-comment-section .article-comment-link-update,
+.article-comment-section .article-comment-link-delete {
+  color: #00d4ff;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-left: 1rem;
 }

@@ -39,7 +39,6 @@ const userSchema = new Schema(
     ],
     twitterProfile: {
       type: String,
-      unique: true,
     },
     articleAuthored: [
       {

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= article.title %></title>
+    <link rel="stylesheet" href="/stylesheets/index.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+  </head>
+  <body class="article-container">
+    <header class="article-header flex space-between">
+      <h2>Pranalika</h2>
+      <% if(user){ %>
+      <a class="article-logout" href="/users/logout">
+        <i class="fas fa-sign-out-alt"></i>
+      </a>
+      <% } else { %>
+      <a class="article-login" href="/users/login">
+        <i class="fas fa-sign-in-alt"></i>
+      </a>
+      <% } %>
+    </header>
+    <main class="main-content">
+      <div class="left-sidebar"></div>
+      <section class="center-content-area">
+        <h1 class="article-title">
+          <%= article.title %>
+          <span class="article-date">
+            <% const date = article.createdAt.toString().split(" ") %> (<%=
+            `${date[2]}, ${date[1]} ${date[3]}` %>)
+          </span>
+        </h1>
+        <div class="article-author-div flex space-between">
+          <div class="left-side">
+            <span>By -</span>
+            <a
+              class="article-author-link"
+              href="/users/<%= article.author._id %>/articles"
+            >
+              <span class="article-author"><%= article.author.username %></span>
+            </a>
+          </div>
+          <div class="right-side">
+            <button class="btn btn-follow">
+              Follow
+            </button>
+          </div>
+        </div>
+        <div class="article-description">
+          <%- article.description %>
+        </div>
+        <section class="article-comment-section">
+          <div class="article-comments">
+            <% if(article.comments) { %>
+            <span>Comments :</span>
+            <% } else { %>
+            <span>No Comments yet! Be the first one to comment!!!</span>
+            <% } %>
+            <p></p>
+            <ul class="article-comment-list">
+              <% comments.forEach((comment,index) => { %>
+              <li class="article-comment-list-item">
+                <div class="flex space-between">
+                  <p class="left-side">
+                    <span class="fa-icon">
+                      <i class="fas fa-comment fa-gap"></i>
+                    </span>
+                    <span class="list-item-title">
+                      <a
+                        class="article-comment-link"
+                        href="/users/<%= comment.userId._id %>/showcase"
+                      >
+                        <%= comment.userId.username.toUpperCase() %>
+                      </a>
+                      <% const date = comment.createdAt.toString().split(" ") %>
+                      (<%= `${date[2]}, ${date[1]} ${date[3]}` %>)
+                    </span>
+                  </p>
+                  <% if(comment.userId._id.toString() ===
+                  article.author._id.toString()) { %>
+                  <div class="right-side">
+                    <a
+                      class="article-comment-link-update"
+                      href="/comments/<%= comment._id %>/update"
+                      >Update</a
+                    >
+                    <a
+                      class="article-comment-link-delete"
+                      href="/comments/<%= comment._id %>/delete"
+                      >Delete</a
+                    >
+                  </div>
+                  <% } %>
+                </div>
+                <p class="comment-content-para">
+                  <%= comment.content %>
+                </p>
+              </li>
+              <% }) %>
+            </ul>
+          </div>
+          <form action="/articles/<%= article._id %>/comment" method="POST">
+            <textarea
+              name="content"
+              id="article-comment"
+              placeholder="Add comment"
+              class="article-comment"
+            ></textarea>
+            <button class="btn btn-add-comment">Add Comment</button>
+          </form>
+        </section>
+      </section>
+      <div class="right-sidebar"></div>
+    </main>
+  </body>
+</html>
