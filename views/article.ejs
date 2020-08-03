@@ -83,10 +83,11 @@
                       (<%= `${date[2]}, ${date[1]} ${date[3]}` %>)
                     </span>
                   </p>
-                  <% if(comment.userId._id.toString() ===
-                  article.author._id.toString()) { %>
+                  <% if(user && comment.userId._id.toString() ===
+                  user._id.toString()) {%>
                   <div class="right-side">
                     <a
+                      data-commentid="<%= comment._id %>"
                       class="article-comment-link-update"
                       href="/comments/<%= comment._id %>/update"
                       >Update</a
@@ -106,7 +107,11 @@
               <% }) %>
             </ul>
           </div>
-          <form action="/articles/<%= article._id %>/comment" method="POST">
+          <form
+            class="add-comment-form"
+            action="/articles/<%= article._id %>/comment"
+            method="POST"
+          >
             <textarea
               name="content"
               id="article-comment"
@@ -119,5 +124,40 @@
       </section>
       <div class="right-sidebar"></div>
     </main>
+    <script>
+      const commentForm = document.querySelector(".add-comment-form");
+
+      function handleClickOnUpdateLink(e) {
+        if (!e.target.closest(".article-comment-link-update")) return;
+        e.preventDefault();
+        commentForm.style.display = "none";
+        const updateBtn = e.target.closest(".article-comment-link-update");
+        const commentId = updateBtn.dataset.commentid;
+
+        const elementToBeReplaced = updateBtn.parentElement.parentElement;
+        const parentLi = elementToBeReplaced.parentElement;
+        const commentText = parentLi.querySelector(".comment-content-para")
+          .innerText;
+        const textareaDOM = document.createElement("div");
+
+        const updateForm = `
+            <form class="update-comment-form" method="POST" action="/comments/${commentId}/update">
+                <textarea class="update-comment-content" name="content" ></textarea>
+                <input class="btn btn-update-comment" type="submit" value="Update Comment">
+            </form>
+        `;
+
+        textareaDOM.innerHTML = updateForm;
+        parentLi.replaceChild(textareaDOM, elementToBeReplaced);
+        parentLi.removeChild(parentLi.querySelector(".comment-content-para"));
+        const textArea = textareaDOM.querySelector("textarea");
+        textArea.value = commentText;
+        textArea.focus();
+      }
+
+      document.body.addEventListener("click", function (e) {
+        handleClickOnUpdateLink(e);
+      });
+    </script>
   </body>
 </html>

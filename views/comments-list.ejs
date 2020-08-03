@@ -59,7 +59,7 @@
         </li>
       </ul>
     </div>
-    <div class="index-container list-article-container">
+    <div class="index-container">
       <main class="main">
         <div class="display-details">
           <p class="flex logout">
@@ -71,48 +71,35 @@
             </a>
           </p>
         </div>
-        <div class="main-content">
-          <section class="left-section">
-            <% articles.forEach(article => { %>
-            <div class="list-article-card">
-              <div class="list-article-card-header flex space-between">
-                <p class="article-card-title">
-                  <a target="_blank" href="/articles/<%= article._id %>">
-                    <%= article.title %></a
-                  >
-                </p>
-                <p class="article-card-read-time">
-                  <%= article.readTime %> min
-                </p>
-              </div>
-              <div class="list-article-card-body">
-                <p>
-                  <%- article.description.slice(0,400) %>
-                  <a href="/articles/<%= article._id %>"> Read More...</a>
-                </p>
-              </div>
-              <div class="list-article-card-footer flex space-between">
-                <div class="list-article-card-created">
-                  <% const date = article.createdAt.toString().split(" ") %>
-                  Created on : <%= `${date[2]}, ${date[1]} ${date[3]}` %>
+        <div class="main-content comments-list-container">
+          <div class="left-side">
+            <% if(comments.length){ %>
+            <ul class="comments-list">
+              <% comments.forEach(comment => { %>
+              <li>
+                <div class="comment-list-content">
+                  <div class="comment-list-title">
+                    <a href="/articles/<%= comment.articleId._id %>">
+                      <%= comment.articleId.title %>
+                    </a>
+                  </div>
+                  <div class="comment-list-description">
+                    <span class="fa-icon">
+                      <i class="fas fa-comments"></i>
+                    </span>
+                    <%= comment.content %>
+                  </div>
                 </div>
-                <div class="list-article-card-update-delete">
-                  <a
-                    class="article-card-update"
-                    href="/articles/<%= article._id %>/update"
-                    >Update</a
-                  >
-                  <a
-                    class="article-card-delete"
-                    href="/articles/<%= article._id %>/delete"
-                    >Delete</a
-                  >
-                </div>
-              </div>
-            </div>
-            <% }) %>
-          </section>
-          <section class="right-section"></section>
+              </li>
+              <% }) %>
+            </ul>
+            <% } else { %>
+            <p>
+              No comments yet !!!
+            </p>
+            <% } %>
+          </div>
+          <div class="right-side"></div>
         </div>
       </main>
     </div>

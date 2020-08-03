@@ -351,7 +351,7 @@ img.ql-image {
 }
 
 /* ********************** 
-    Here onwards page specific CSS
+Here onwards page specific CSS
     article.ejs
 */
 .article-container .article-header {
@@ -471,4 +471,33 @@ img.ql-image {
   font-weight: bold;
   font-size: 0.9rem;
   margin-left: 1rem;
+}
+
+.article-comment-section .update-comment-form textarea {
+  display: block;
+  width: 100%;
+  resize: none;
+  font-family: "Nunito", sans-serif;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  outline: 0;
+  margin-bottom: 0.75rem;
+}
+
+/* ********************** 
+    Here onwards page specific CSS
+    comments-list.ejs
+*/
+.comments-list-container {
+  display: grid;
+  grid-template-areas: 4fr 2fr;
+}
+
+.comments-list-container li {
+  margin-bottom: 1rem;
+}
+
+.comments-list-container a {
+  color: #0480c7;
+  font-weight: bold;
 }
