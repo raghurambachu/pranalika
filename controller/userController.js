@@ -45,7 +45,7 @@ exports.logUserIn = function (req, res, next) {
         req.user = user;
         res.locals.user = user;
         req.session.userId = user._id;
-        res.render("index");
+        res.render("dashboard");
       }
     });
   });

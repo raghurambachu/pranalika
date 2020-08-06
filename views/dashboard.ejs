@@ -22,7 +22,7 @@
           </a>
         </li>
         <li class="sd-list-item">
-          <a class="sd-link-item" href="/">
+          <a class="sd-link-item" href="/articles/dashboard">
             <span class="fa-gap"><i class="fas fa-user-circle"></i></span>
             <span>View Profile</span>
           </a>
@@ -59,7 +59,7 @@
         </li>
       </ul>
     </div>
-    <div class="index-container">
+    <div class="index-container index-page-container">
       <main class="main">
         <div class="display-details">
           <p class="flex logout">
@@ -71,35 +71,29 @@
             </a>
           </p>
         </div>
-        <div class="main-content comments-list-container">
-          <div class="left-side">
-            <% if(comments.length){ %>
-            <ul class="comments-list">
-              <% comments.forEach(comment => { %>
-              <li>
-                <div class="comment-list-content">
-                  <div class="comment-list-title">
-                    <a href="/articles/<%= comment.articleId._id %>">
-                      <%= comment.articleId.title %>
-                    </a>
-                  </div>
-                  <div class="comment-list-description">
-                    <span class="fa-icon">
-                      <i class="fas fa-comments"></i>
-                    </span>
-                    <%= comment.content %>
-                  </div>
-                </div>
-              </li>
-              <% }) %>
-            </ul>
-            <% } else { %>
-            <p>
-              No comments yet !!!
-            </p>
-            <% } %>
+        <div class="main-content">
+          <div class="dashboard-cards flex">
+            <div class="dashboard-card dashboard-card-1">
+              <p class="dashboard-card-title">
+                <a class="dashboard-card-link" href="/articles/list"
+                  >Articles Published</a
+                >
+              </p>
+              <h2 class="dashboard-card-title-count">
+                <%= user.articleAuthored.length %>
+              </h2>
+            </div>
+            <div class="dashboard-card dashboard-card-2">
+              <p class="dashboard-card-title">
+                <a class="dashboard-card-link" href="/comments/list">
+                  Comments</a
+                >
+              </p>
+              <h2 class="dashboard-card-title-count">
+                <%= user.comments.length %>
+              </h2>
+            </div>
           </div>
-          <div class="right-side"></div>
         </div>
       </main>
     </div>

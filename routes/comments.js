@@ -19,8 +19,9 @@ router.get("/list", auth.verifyUserLoggedIn, (req, res, next) => {
 router.get("/:id/delete", auth.verifyUserLoggedIn, (req, res, next) => {
   const commentId = req.params.id;
   Comment.findOne({ _id: commentId })
-    .populate("userId", "_id")
+    .populate("userId", "_id username")
     .exec((err, comment) => {
+      console.log(comment);
       if (err) return next(err);
       if (req.user._id.toString() === comment.userId._id.toString()) {
         Comment.findByIdAndDelete(commentId, (err, deletedComment) => {

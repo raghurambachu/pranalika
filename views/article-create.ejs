@@ -21,13 +21,13 @@
     <div class="sidebar">
       <ul class="sidebar-list">
         <li class="sd-list-item">
-          <a class="sd-link-item" href="/">
+          <a class="sd-link-item" href="/articles/dashboard">
             <span class="fa-gap"><i class="fas fa-tachometer-alt"></i></span>
             <span>Dashboard</span>
           </a>
         </li>
         <li class="sd-list-item">
-          <a class="sd-link-item" href="/">
+          <a class="sd-link-item" href="/articles/dashboard">
             <span class="fa-gap"><i class="fas fa-user-circle"></i></span>
             <span>View Profile</span>
           </a>
@@ -41,7 +41,7 @@
         <li class="sd-list-item">
           <a class="sd-link-item" href="/articles/list">
             <span class="fa-gap"><i class="fas fa-newspaper"></i></span>
-            <span>View Post</span>
+            <span>My Posts</span>
           </a>
         </li>
         <li class="sd-list-item">
@@ -140,7 +140,7 @@
             },
           }),
         }).then(() => {
-          window.location.href = "/";
+          window.location.href = "/articles/list";
         });
         createPostForm.reset();
       });

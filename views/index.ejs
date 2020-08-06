@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pranalika</title>
     <link rel="stylesheet" href="/stylesheets/index.css" />
     <link
@@ -12,86 +14,232 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
     />
   </head>
-  <body>
-    <div class="sidebar">
-      <ul class="sidebar-list">
-        <li class="sd-list-item">
-          <a class="sd-link-item" href="/">
-            <span class="fa-gap"><i class="fas fa-tachometer-alt"></i></span>
-            <span>Dashboard</span>
+  <body class="index-public-container">
+    <div class="index">
+      <header class="article-header flex space-between">
+        <a class="article-header-title" href="/"><h2>Pranalika</h2></a>
+        <% if(user){ %>
+        <div class="index-search-bar">
+          <form class="index-search-form" action="">
+            <input
+              name="search"
+              class="index-input"
+              type="text"
+              placeholder="Search"
+            />
+            <button class="btn-search" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+        </div>
+        <div class="navigation-links">
+          <a class="article-dashboard" href="/articles/dashboard">Dashboard</a>
+          <a class="article-logout" href="/users/logout">
+            <i class="fas fa-sign-out-alt"></i>
           </a>
-        </li>
-        <li class="sd-list-item">
-          <a class="sd-link-item" href="/">
-            <span class="fa-gap"><i class="fas fa-user-circle"></i></span>
-            <span>View Profile</span>
-          </a>
-        </li>
-        <li class="sd-list-item">
-          <a class="sd-link-item" href="/articles/new">
-            <span class="fa-gap"><i class="fas fa-plus"></i></span>
-            <span>Add Post</span>
-          </a>
-        </li>
-        <li class="sd-list-item">
-          <a class="sd-link-item" href="/articles/list">
-            <span class="fa-gap"><i class="fas fa-newspaper"></i></span>
-            <span>View Post</span>
-          </a>
-        </li>
-        <li class="sd-list-item">
-          <a class="sd-link-item" href="/articles/list">
-            <span class="fa-gap"><i class="fas fa-edit"></i></span>
-            <span>Update Post</span>
-          </a>
-        </li>
-        <li class="sd-list-item">
-          <a class="sd-link-item" href="/articles/list">
-            <span class="fa-gap"><i class="fas fa-trash"></i></span>
-            <span>Delete Post</span>
-          </a>
-        </li>
-        <li class="sd-list-item">
-          <a class="sd-link-item" href="/comments/list">
-            <span class="fa-gap"><i class="fas fa-comments"></i></span>
-            <span>View Comments</span>
-          </a>
-        </li>
-      </ul>
+        </div>
+        <% } else { %>
+        <a class="article-login" href="/users/login">
+          <i class="fas fa-sign-in-alt"></i>
+        </a>
+        <% } %>
+      </header>
     </div>
-    <div class="index-container index-page-container">
-      <main class="main">
-        <div class="display-details">
-          <p class="flex logout">
-            <span>
-              Howdy, <%= user.username %>
-            </span>
-            <a class="btn-logout" href="/users/logout">
-              <i class="fas fa-sign-out-alt"></i>
+    <main>
+      <% if(articles.length >= 5) { %>
+      <section class="index-ejs-top top content-container">
+        <div class="sd-left">
+          <article class="left-article">
+            <div class="img-holder">
+              <a href="/articles/<%= articles[0]._id %>">
+                <img
+                  src="https://picsum.photos/200/300"
+                  class="left-article-image"
+                  alt=""
+                />
+              </a>
+            </div>
+            <a
+              class="index-article-title-link"
+              href="/articles/<%= articles[0]._id %>"
+            >
+              <h2><%= articles[0].title %></h2>
             </a>
-          </p>
+            <div class="index-article-author">
+              <p>
+                By-
+                <a href="/users/<%= articles[0].author._id %>">
+                  <%= articles[0].author.username.toUpperCase() %>
+                </a>
+                <span>
+                  (<%= articles[0].createdAt.toString().split(" ").slice(1,4)
+                  %>)
+                </span>
+              </p>
+            </div>
+          </article>
         </div>
-        <div class="main-content">
-          <div class="dashboard-cards flex">
-            <div class="dashboard-card dashboard-card-1">
-              <p class="dashboard-card-title">
-                Articles Published
-              </p>
-              <h2 class="dashboard-card-title-count">
-                <%= user.articleAuthored.length %>
-              </h2>
+        <div class="sd-center">
+          <article>
+            <div class="flex space-between">
+              <div>
+                <a href="/articles/<%= articles[1]._id %>">
+                  <img
+                    class="sd-center-image"
+                    src="https://picsum.photos/200"
+                    alt="Img"
+                  />
+                </a>
+              </div>
+              <div class="sd-center-right">
+                <a href="/articles/<%= articles[1]._id %>">
+                  <%= articles[1].title %>
+                </a>
+                <p>
+                  <span class="sd-center-right-span">
+                    By-
+                    <a
+                      class="sd-center-right-link"
+                      href="/users/<%= articles[1].author._id %>"
+                    >
+                      <%= articles[1].author.username.toUpperCase() %>
+                    </a>
+                  </span>
+                </p>
+                <p class="sd-center-read-time">
+                  (<%= articles[1].readTime %> mins)
+                </p>
+              </div>
             </div>
-            <div class="dashboard-card dashboard-card-2">
-              <p class="dashboard-card-title">
-                Comments
-              </p>
-              <h2 class="dashboard-card-title-count">
-                <%= user.comments.length %>
-              </h2>
+          </article>
+          <article>
+            <div class="flex space-between">
+              <div>
+                <a href="/articles/<%= articles[1]._id %>">
+                  <img
+                    class="sd-center-image"
+                    src="https://picsum.photos/200"
+                    alt="Img"
+                  />
+                </a>
+              </div>
+              <div class="sd-center-right">
+                <a href="/articles/<%= articles[2]._id %>">
+                  <%= articles[2].title %>
+                </a>
+                <p>
+                  <span class="sd-center-right-span">
+                    By-
+                    <a
+                      class="sd-center-right-link"
+                      href="/users/<%= articles[2].author._id %>"
+                    >
+                      <%= articles[2].author.username.toUpperCase() %>
+                    </a>
+                  </span>
+                </p>
+                <p class="sd-center-read-time">
+                  (<%= articles[2].readTime %> mins)
+                </p>
+              </div>
             </div>
+          </article>
+          <article>
+            <div class="flex space-between">
+              <div>
+                <a href="/articles/<%= articles[3]._id %>">
+                  <img
+                    class="sd-center-image"
+                    src="https://picsum.photos/200"
+                    alt="Img"
+                  />
+                </a>
+              </div>
+              <div class="sd-center-right">
+                <a href="/articles/<%= articles[3]._id %>">
+                  <%= articles[3].title %>
+                </a>
+                <p>
+                  <span class="sd-center-right-span">
+                    By-
+                    <a
+                      class="sd-center-right-link"
+                      href="/users/<%= articles[3].author._id %>"
+                    >
+                      <%= articles[3].author.username.toUpperCase() %>
+                    </a>
+                  </span>
+                </p>
+                <p class="sd-center-read-time">
+                  (<%= articles[3].readTime %> mins)
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="sd-right">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium,
+          ullam nihil fuga excepturi earum optio deleniti eaque incidunt facere
+          consequuntur necessitatibus cumque quod reiciendis? Quas eaque esse
+          corporis nisi alias!
+        </div>
+      </section>
+      <section class="index-ejs-bottom content-container">
+        <% for(let i = 5; i < articles.length; i++){ %>
+        <article class="flex space-between">
+          <div class="bottom-left-side">
+            <div class="bottom-article-title">
+              <a href="/articles/<%= articles[i]._id %>">
+                <h1><%= articles[i].title %></h1>
+              </a>
+            </div>
+            <div></div>
           </div>
-        </div>
-      </main>
-    </div>
+          <div class="bottom-right-side">
+            <a href="/articles/<%= articles[i]._id %>">
+              <img src="https://picsum.photos/200/300" alt="Picsum" />
+            </a>
+          </div>
+        </article>
+
+        <% } %>
+      </section>
+      <% } %>
+    </main>
+    <script>
+      const commentForm = document.querySelector(".add-comment-form");
+
+      function handleClickOnUpdateLink(e) {
+        if (!e.target.closest(".article-comment-link-update")) return;
+        e.preventDefault();
+        commentForm.style.display = "none";
+        const updateBtn = e.target.closest(".article-comment-link-update");
+        const commentId = updateBtn.dataset.commentid;
+
+        const elementToBeReplaced = updateBtn.parentElement.parentElement;
+        const parentLi = elementToBeReplaced.parentElement;
+        const commentText = parentLi.querySelector(".comment-content-para")
+          .innerText;
+        const textareaDOM = document.createElement("div");
+
+        const updateForm = `
+            <form class="update-comment-form" method="POST" action="/comments/${commentId}/update">
+                <textarea class="update-comment-content" name="content" ></textarea>
+                <input class="btn btn-update-comment" type="submit" value="Update Comment">
+            </form>
+        `;
+
+        textareaDOM.innerHTML = updateForm;
+        parentLi.replaceChild(textareaDOM, elementToBeReplaced);
+        parentLi.removeChild(parentLi.querySelector(".comment-content-para"));
+        const textArea = textareaDOM.querySelector("textarea");
+        textArea.value = commentText;
+        textArea.focus();
+      }
+
+      document.body.addEventListener("click", function (e) {
+        handleClickOnUpdateLink(e);
+      });
+    </script>
   </body>
 </html>

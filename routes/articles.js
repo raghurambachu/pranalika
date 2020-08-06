@@ -8,8 +8,11 @@ const User = require("../models/User");
 
 const router = express.Router();
 
-router.get("/", auth.verifyUserLoggedIn, (req, res, next) => {
-  res.render("index");
+router.get("/dashboard", auth.verifyUserLoggedIn, async (req, res, next) => {
+  //display the latest documents
+  const count = await User.find({}).countDocuments();
+
+  res.render("dashboard");
 });
 
 router.get("/list", auth.verifyUserLoggedIn, (req, res, next) => {
